@@ -33,7 +33,6 @@
     -moz-box-shadow: 10px 9px 30px -4px rgba(0,0,0,0.6);
 }
 .title{
-    /* width: 100vw; */
     background-color: #F1F1F1;
     height: 3.5vh;
     margin: 2vh 30px 3vh 30px;
@@ -64,7 +63,6 @@
     background-color: rgb(255, 255, 255);
     align-items: flex-start;
     padding: 15px;
-    /* padding-left: 15px; */
     width: 44vw;
     border: 1px solid #DADADA;
     border-radius: 25px;

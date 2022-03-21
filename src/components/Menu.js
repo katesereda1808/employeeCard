@@ -6,7 +6,7 @@ import greenPoint from "./images/greenPoint.svg";
 import violetPoint from "./images/violetPoint.svg";
 const Menu =()=>{
     return(
-        <div className={s.container}>
+        <div className={s.menu_container}>
             <header>
                 <img src={logo}></img>
                 <img src={more}></img>

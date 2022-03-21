@@ -1,23 +1,38 @@
-import React,{useState} from "react";
+import React,{Component} from "react";
 import s from "./MainPage.module.css";
 import avatar from "./images/avatar.svg";
 import arrow from "./images/arrow.svg";
-import save from "./images/save.svg";
 import buttonArrow from "./images/buttonArrow.svg";
-const MainPage =()=>{
-    const[info, setInfo] = useState({
-        name: 'blabla',
-        birthday: '',
-        citizenship: '',
-
-    });
-    const infoHandler=(e)=>{
-        setInfo({[e.target.name]: e.target.value});
+class MainPage extends Component{
+    state = {};
+    infoHandler=(e)=>{
+         this.setState({[e.target.name]:e.target.value})
     }
-    const handleSubmit=(e)=>{
+    handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(info);
+        let url = 'http://localhost:5000/';
+        const headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        };
+        fetch(url, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(
+                this.state
+                ),
+        })
+        .then(response => {
+            if(response.ok){
+                alert(`Данные отправлены Response status:${response.status}`)
+                console.log(response)
+            }else{
+                alert("Данные не отправлены")
+            }
+        })
+        console.log(this.state);
     }
+    render(){
     return(
         <div className={s.container}>
             <header className={s.header}>
@@ -28,73 +43,71 @@ const MainPage =()=>{
             <div className={s.card}>
                 <img className={s.avatar} src={avatar}></img>
                 <div className={s.info}>
-                    <form className={s.form} onSubmit={handleSubmit}>
+                    <form className={s.form} onSubmit={this.handleSubmit}>
                             <label>
                         ФИО:
-                            <input type="text" name="name" placeholder="..." onChange={infoHandler}></input>
+                            <input type="text" name="name" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Дата рождения:
-                            <input type="text" name="birthday" placeholder="..." onChange={infoHandler}></input>
+                            <input type="text" name="birthday" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Гражданство:
-                            <input type="text" name="citizenship" placeholder="..." onChange={infoHandler}></input>
+                            <input type="text" name="citizenship" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Адрес проживания:
-                            <input type="text" name="address" placeholder="..."></input>
+                            <input type="text" name="address" id={s.address}placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Руководитель группы:
-                            <input type="text" name="leader" placeholder="..."></input>
+                            <input type="text" name="leader" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Должность:
-                            <input type="text" name="post" placeholder="..."></input>
+                            <input type="text" name="post" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Телефон:
-                            <input type="text" name="phone" placeholder="..."></input>
+                            <input type="text" name="phone" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Почта (личная):
-                            <input type="text" name="mail" placeholder="..."></input>
+                            <input type="text" name="mail" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Почта (рабочая, если есть):
-                            <input type="text" name="workMail" placeholder="..."></input>
+                            <input type="text" name="workMail" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Дата приема на работу:
-                            <input type="text" name="date" placeholder="..."></input>
+                            <input type="text" name="date" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Размер оплаты труда:
-                            <input type="text" name="salary" placeholder="..."></input>
+                            <input type="text" name="salary" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
                         <label>
                         Оформление:
-                            <input type="text" name="registration" placeholder="..."></input>
+                            <input type="text" name="registration" placeholder="..." onChange={this.infoHandler}></input>
                         </label>
-                        <input type="submit" value="Сохранить"></input>
-                        {/* <img className={s.save} src={save}></img> */}
-                    
+                        <input type="submit" value="Сохранить" className={s.save}></input>          
                     </form>
                     <div className={s.comments}>
                         <div className={s.line}>
-                            <input placeholder="Комментарии..."></input>
+                            <form onSubmit={this.handleSubmit}>
+                            <input type="text" name="comments" placeholder="Комментарии..." onChange={this.infoHandler}></input>
+                            <input type="submit" value="Сохранить" className={s.save}></input>
+                            </form>
                         </div>
-                        <img className={s.save} src={save}></img>
                     </div>
                 </div>
-                
             </div>
             <div className={s.title}>
                 Занятость сотрудника
             </div>
             <div className={s.workflow}>
-                
                 <table>
                     <thead>
                        <tr>
@@ -126,12 +139,9 @@ const MainPage =()=>{
                               </td>
                           </tr>
                     </tbody>
-                      
                 </table>
-
             </div>
-            
         </div>
-    )
+    )}
 }
 export {MainPage};

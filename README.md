@@ -1,3 +1,15 @@
+#Запустить приложение
+### `npm start`
+Открыть [http://localhost:3000], чтобы увидеть приложение в браузере
+
+#Запустить backend
+В редакторе кода открыть папку "backend
+ в терминале
+ запустить
+ ### `node app`
+ Сервер запустится на 5000 порту
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
